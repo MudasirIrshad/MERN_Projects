@@ -32,8 +32,8 @@ app.get('/tasks',async (req,res)=>{
     res.send(tasks)
 })
 
-app.delete('/tasks',async(req,res)=>{
-    const id=req.headers.id
+app.delete('/tasks/:taskID',async(req,res)=>{
+    const id=req.params.taskID
     const task=await AddTask.findByIdAndDelete(id)
     res.json(task)
 })
