@@ -25,7 +25,7 @@ function App() {
   const toggleDeleteTasks = () => {
     setDeleteTasks(!deleteTasks);
   };
-  const [TaskID, setTaskID] = useState("")
+  const [TaskID, setTaskID] = useState("");
   return (
     <div>
       <button onClick={handleClick}>Toggle Tasks</button>
@@ -33,7 +33,7 @@ function App() {
       {showTasks && (
         <ul>
           {tasks.map((task) => (
-            <li style={{listStyle:"none", padding:"0.5rem"}} key={task._id}>
+            <li style={{ listStyle: "none", padding: "0.5rem" }} key={task._id}>
               {task._id}: {task.title}: {task.description}
             </li>
           ))}
@@ -41,7 +41,7 @@ function App() {
       )}
       <button onClick={toggleAddTasks}>Add Tasks</button>
       {addTasks && (
-        <form style={{padding:".5rem"}} action="post">
+        <form style={{ padding: ".5rem" }} action="post">
           <input
             type="text"
             name="title"
@@ -82,33 +82,39 @@ function App() {
         </form>
       )}
       <button onClick={toggleDeleteTasks}>Delete Tasks</button>
-      {
-        deleteTasks && (
-          <>
-          <form style={{padding:".5rem"}} action="post">
-            <input type="text" placeholder="Task ID" onChange={(e)=>{
-              setTaskID(e.target.value)
-            }}/>
-            <input type="submit" value="Submit" onClick={()=>{
-              axios
-               .delete(
-                  `http://localhost:3000/tasks/${TaskID}`,
-                  { headers: { "Content-Type": "application/json" } } // Headers
-                )
-               .then((response) => {
-                  // Handle response
-                  console.log("Response:", response);
-                })
-               .catch((error) => {
-                  // Handle error
-                  console.error("Error:", error);
-                });
-              event.preventDefault();
-            }}></input>
+      {deleteTasks && (
+        <>
+          <form style={{ padding: ".5rem" }} action="post">
+            <input
+              type="text"
+              placeholder="Task ID"
+              onChange={(e) => {
+                setTaskID(e.target.value);
+              }}
+            />
+            <input
+              type="submit"
+              value="Submit"
+              onClick={() => {
+                axios
+                  .delete(
+                    `http://localhost:3000/tasks/${TaskID}`,
+                    { headers: { "Content-Type": "application/json" } } // Headers
+                  )
+                  .then((response) => {
+                    // Handle response
+                    console.log("Response:", response);
+                  })
+                  .catch((error) => {
+                    // Handle error
+                    console.error("Error:", error);
+                  });
+                event.preventDefault();
+              }}
+            ></input>
           </form>
-          </>
-        )
-      }
+        </>
+      )}
     </div>
   );
 }
