@@ -1,19 +1,36 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+
 function App() {
   const [tasks, setTasks] = useState([]);
-  useEffect(() => {
-    const response = axios.get("http://localhost:3000/tasks").then((response) => {
-    setTasks(response.data)
-    })
-  }, []);
-  return (
-    <>
-      <p>{tasks.map((i)=>{
-        return <><li key={i._id}>{i.title+": "+i.description}</li><button style={{background:"white", color:"black"}}>delete</button><br /> </>
+  const [showTasks, setShowTasks] = useState(false); // State to control the display of tasks
 
-      })}</p>
-    </>
+  useEffect(() => {
+    axios.get("http://localhost:3000/tasks").then((response) => {
+      setTasks(response.data);
+    });
+  }, []);
+
+  const handleClick = () => {
+    // Toggle the state to show/hide tasks
+    setShowTasks(!showTasks);
+  };
+
+  return (
+    <div>
+      <button onClick={handleClick}>Toggle Tasks</button>
+      {/* Conditionally render tasks based on showTasks state */}
+      {showTasks && (
+        <ul>
+          {tasks.map((task) => (
+            <li key={task._id}>
+              {task.title}: {task.description}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
   );
 }
+
 export default App;
