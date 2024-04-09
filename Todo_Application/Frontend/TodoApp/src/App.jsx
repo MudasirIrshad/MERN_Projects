@@ -6,9 +6,11 @@ function App() {
   const [showTasks, setShowTasks] = useState(false); // State to control the display of tasks
 
   useEffect(() => {
-    axios.get("http://localhost:3000/tasks").then((response) => {
+    setInterval(()=>{
+      axios.get("http://localhost:3000/tasks").then((response) => {
       setTasks(response.data);
     });
+    },1000)
   }, []);
 
   const handleClick = () => {
@@ -48,6 +50,7 @@ function App() {
             placeholder="Title"
             onChange={(e) => {
               setTitle(e.target.value);
+              
             }}
           />
           <input
@@ -71,12 +74,15 @@ function App() {
                 .then((response) => {
                   // Handle response
                   console.log("Response:", response);
+                  setTitle(" ")
+                  setDescription(" ")
                 })
                 .catch((error) => {
                   // Handle error
                   console.error("Error:", error);
                 });
               event.preventDefault();
+              title.textContent = ""
             }}
           />
         </form>
@@ -96,6 +102,7 @@ function App() {
               type="submit"
               value="Submit"
               onClick={() => {
+                setTaskID(" ")
                 axios
                   .delete(
                     `http://localhost:3000/tasks/${TaskID}`,
@@ -109,6 +116,7 @@ function App() {
                     // Handle error
                     console.error("Error:", error);
                   });
+                
                 event.preventDefault();
               }}
             ></input>
