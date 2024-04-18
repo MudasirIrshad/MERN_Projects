@@ -18,12 +18,18 @@ export default function SignUn() {
           />
           <TextField
             id="standard-basic"
-            label="Email"
+            label="Gmail"
+            variant="standard"
+            style={{ paddingBottom: "10px" }}
+          />
+          <TextField
+            id="standard-basic"
+            label="Password"
             variant="standard"
             style={{ paddingBottom: "10px" }}
           />
           <br />
-          <Button variant="contained">SignUp</Button>
+          <Button variant="contained">Sign Up</Button>
         </Card>
       </Box>
     </div>
