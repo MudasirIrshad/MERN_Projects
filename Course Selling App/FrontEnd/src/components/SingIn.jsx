@@ -45,7 +45,11 @@ export default function SignIn() {
           />
           <br />
           <Button variant="contained" onClick={() => {
-            axios.post('/')
+            axios.post('http://localhost:3000/admin/signup', {
+              name: name,
+              gmail: email,
+              password: password,
+            })
           }}>
             Sign In
           </Button>
