@@ -49,7 +49,10 @@ export default function SignIn() {
               name: name,
               gmail: email,
               password: password,
+            }).then((response)=>{
+              console.log(response.data)
             })
+            
           }}>
             Sign In
           </Button>

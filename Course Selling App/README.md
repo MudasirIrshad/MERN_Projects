@@ -1,8 +1,8 @@
 # MERN_Projects
-Here we Create a fully featured MERN projects. 
-In these projects we use different MERN techniques to improve our development skills.
+Creating a fully featured MERN project. 
+In this project we will create a fully functional Course Selling Application.
 
-STEPS TO RUN THE PROJECTs:
+STEPS TO RUN THE PROJECT:
 
 For FrontEnd:
 1. npm create vite@latest

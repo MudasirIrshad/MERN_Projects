@@ -45,7 +45,6 @@ app.listen(port, () => {
 const AdminSecretKey = "JWT Course selling server";
 app.post("/admin/signup", async (req, res) => {
   const { name, gmail, password } = req.body;
-  console.log(gmail);
   let findAdmin = await AdminSignup.findOne({ gmail });
   if (findAdmin) {
     res.status(401).send("Admin Exits");
