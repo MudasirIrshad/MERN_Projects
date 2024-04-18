@@ -9,6 +9,7 @@ For FrontEnd:
 2. npm install
 3. npm install @mui/material @emotion/react @emotion/styled
 4. npm install react-router-dom
+5. npm install axios
 
 For Backend:
 1. npm install
