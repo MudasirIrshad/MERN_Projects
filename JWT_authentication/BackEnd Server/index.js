@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 const port = 3000;
 const mongoose = require('mongoose');
 const jwt=require('jsonwebtoken')
+const cors = require('cors');
+app.use(cors())
 app.use(bodyParser.json());
 
 const URL = 'mongodb+srv://mudasirirshad47:mudasir123456789@cluster0.jzcnrjw.mongodb.net/AuthenticationDB';
@@ -33,6 +35,7 @@ app.post('/signup', async (req, res) => {
       });
       res.send("Done")
       newUser.save();
+      console.log(name,gmail,password);
   }
   
 });
