@@ -55,13 +55,12 @@ export default function Login() {
                   password: password,
                 })
                 .then((response) => {
-                  if(response.data.token){
-                    alert("Login Done")
-                    localStorage.setItem("token", response.data.token)
-                    window.location="/"
-                  }
-                  else{
-                    alert("Login Failed")
+                  if (response.data.token) {
+                    alert("Login Done");
+                    localStorage.setItem("token", response.data.token);
+                    window.location = "/";
+                  } else {
+                    alert("Login Failed");
                   }
                 });
             }}
