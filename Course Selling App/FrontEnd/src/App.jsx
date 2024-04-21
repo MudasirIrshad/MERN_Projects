@@ -6,6 +6,7 @@ import SignUp from "./components/SignUp";
 import AddCourses from "./components/AddCourses";
 import axios from "axios";
 import Home from "./Home";
+import CourseDetail from "./components/CourseDetail";
 function App() {
   return (
     <>
@@ -16,6 +17,7 @@ function App() {
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/addCourses" element={<AddCourses/>}/>
+          <Route path="/courseDetail" element={<CourseDetail/>}/>
         </Routes>
       </Router>
     </>

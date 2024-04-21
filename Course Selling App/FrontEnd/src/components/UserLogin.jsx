@@ -24,13 +24,14 @@ function UserLogin() {
   if(isLoggedIn) {
     return (
       <div style={{display:"flex", justifyContent:"space-between"}}>
-        <Typography variant="h7">Welcome {userName}</Typography>
+        <Button variant="contained" style={{backgroundColor:"Red"}}>Logo</Button>
         <ButtonGroup>
           <Button
             variant="contained"
             onClick={() => {
               localStorage.removeItem("token");
               setIsLoggedIn(false);
+              window.location="/signin"
             }}
           >
             Logout
@@ -51,16 +52,7 @@ function UserLogin() {
   return (
     <>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <div
-          style={{
-            backgroundColor: "Red",
-            color: "White",
-            padding: "1px",
-            borderRadius: "10px",
-          }}
-        >
-          <Typography>My logo</Typography>
-        </div>
+        <Button variant="contained" style={{backgroundColor:"Red"}}>Logo</Button>
         <ButtonGroup
           variant="outlined"
           aria-label="Basic button group"
