@@ -45,16 +45,22 @@ export default function SignIn() {
           />
           <br />
           <Button variant="contained" onClick={() => {
-            axios.post('http://localhost:3000/admin/signup', {
+            axios.post('http://localhost:3000/admin/login', {
               name: name,
               gmail: email,
               password: password,
             }).then((response)=>{
-              console.log(response.data)
-            })
+              if(response.data.token){
+                alert('Success');
+                localStorage.setItem('token', response.data.token);
+              }
+            }).catch((error) => {
+              if(error.response.status === 401) {
+                  alert('Invalid credentials');
+              }});
             
           }}>
-            Sign In
+            Login
           </Button>
         </Card>
       </Box>

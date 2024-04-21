@@ -1,6 +1,7 @@
 import ButtonGroup from "@mui/material/ButtonGroup";
 import Button from "@mui/material/Button";
 import { Typography } from "@mui/material";
+import axios from "axios";
 
 function UserLogin() {
   return (
@@ -35,7 +36,12 @@ function UserLogin() {
               e.preventDefault();
             }}
           >
-            SignIn
+            Login
+          </Button>
+          <Button style={{backgroundColor:"red", color:"white"}} onClick={()=>{
+            window.location = '/addCourses'
+          }}>
+            Add Course
           </Button>
         </ButtonGroup>
       </div>

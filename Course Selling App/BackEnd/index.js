@@ -54,9 +54,7 @@ app.post("/admin/signup", async (req, res) => {
       gmail,
       password,
     });
-    jwt.sign({ name, gmail, password }, AdminSecretKey, (err, token) => {
-      res.send({ name, gmail, password, token });
-    });
+    
     newAdmin.save();
   }
 });
@@ -65,16 +63,28 @@ app.post("/admin/signup", async (req, res) => {
 const AdminAuthentication = (req, res, next) => {
   const token = req.headers.authorization.split(" ")[1];
   if (!token) return res.status(401).send("Access denied. No token provided.");
-
+  console.log(token);
   jwt.verify(token, AdminSecretKey, (err, decoded) => {
     if (err) return res.status(401).send("Invalid token.");
     req.user = decoded;
     next();
   });
 };
-app.post("/admin/login", AdminAuthentication, (req, res) => {
-  res.send("Login Done");
+app.post("/admin/login", async (req, res) => {
+  const { name, gmail, password } = req.body;
+  let findAdmin = await AdminSignup.findOne({ name,gmail, password });
+  if (findAdmin) {
+    jwt.sign({ name, gmail, password }, AdminSecretKey, (err, token) => {
+      res.status(200).send({ name, gmail, token });
+    });
+  } else {
+    res.status(401).send("Invalid credentials");
+  }
 });
+
+app.get('/admin/detail',AdminAuthentication,(req,res)=>{
+  res.json(req.user.gmail)
+})
 // ---------------------------------------------------
 app.get("/admin/users", AdminAuthentication, async (req, res) => {
   const users = await UserSignup.find();

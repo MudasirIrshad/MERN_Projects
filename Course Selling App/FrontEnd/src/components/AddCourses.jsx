@@ -4,11 +4,10 @@ import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import { useState } from "react";
 import axios from "axios";
-
-export default function SignUp() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+export default function AddCourses() {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [price, setPrice] = useState("");
 
   return (
     <div style={{ display: "flex", justifyContent: "center", margin: "50px" }}>
@@ -19,48 +18,60 @@ export default function SignUp() {
         >
           <TextField
             id="standard-basic"
-            label="Name"
+            label="Title"
             variant="standard"
             style={{ paddingBottom: "10px" }}
             onChange={(e) => {
-              setName(e.target.value);
+              setTitle(e.target.value);
             }}
           />
           <TextField
             id="standard-basic"
-            label="Email"
+            label="Description"
             variant="standard"
             style={{ paddingBottom: "10px" }}
             onChange={(e) => {
-              setEmail(e.target.value);
+              setDescription(e.target.value);
             }}
           />
           <TextField
             id="standard-basic"
-            label="Password"
+            label="Price"
             variant="standard"
             style={{ paddingBottom: "10px" }}
             onChange={(e) => {
-              setPassword(e.target.value);
+              setPrice(e.target.value);
             }}
           />
           <br />
-
           <Button
             variant="contained"
             onClick={() => {
               axios
-                .post("http://localhost:3000/admin/signup", {
-                  name,
-                  gmail: email,
-                  password: password,
-                })
+                .post(
+                  "http://localhost:3000/admin/courses",
+                  {
+                    title: title,
+                    description: description,
+                    price: price,
+                  },
+                  {
+                    headers: {
+                      "Content-Type": "application/json",
+                      Authorization: "Bearer " + localStorage.getItem("token"),
+                    },
+                  }
+                )
                 .then((response) => {
                   console.log(response.data);
+                  alert("success");
+                })
+                .catch((error) => {
+                  alert(error.message);
                 });
             }}
           >
-            Sign Up
+            Add Course
           </Button>
         </Card>
       </Box>
