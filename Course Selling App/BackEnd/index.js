@@ -104,7 +104,7 @@ app.post("/admin/courses", AdminAuthentication, (req, res) => {
 });
 app.get("/admin/courses", AdminAuthentication, async (req, res) => {
   const courses = await courseAdd.find();
-  res.json({ courses });
+  res.send( courses );
 });
 // ----------------------------------------------------
 const UserSecretKey = "I am a user";

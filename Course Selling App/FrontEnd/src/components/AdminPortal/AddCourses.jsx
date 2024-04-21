@@ -10,6 +10,8 @@ export default function AddCourses() {
   const [price, setPrice] = useState("");
 
   return (
+    <div>
+      
     <div style={{ display: "flex", justifyContent: "center", margin: "50px" }}>
       <Box sx={{ minWidth: 275 }}>
         <Card
@@ -75,6 +77,10 @@ export default function AddCourses() {
           </Button>
         </Card>
       </Box>
+    </div>
+    <Button variant="outlined" onClick={()=>{
+      window.location="/courseDetail"
+    }}>Course Detail</Button>
     </div>
   );
 }

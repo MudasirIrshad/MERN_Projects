@@ -8,6 +8,7 @@ import axios from "axios";
 export default function CourseDetail() {
   const [course, setCourse] = useState([]);
   useEffect(() => {
+    
     axios
       .get("http://localhost:3000/admin/courses", {
         headers: {
@@ -16,18 +17,28 @@ export default function CourseDetail() {
       })
       .then((response) => {
         setCourse(response.data);
-        console.log(response.data);
       });
   }, []);
   return (
-    <>
-      <ul>
-        {
-            course.map((c)=>{
-
-            })
-        }
-      </ul>
-    </>
+    <div style={{display:"flex", justifyContent:"center"}}>
+      <table style={{margin:"20px"}}>
+  <thead >
+    <tr >
+      <th >Title</th>
+      <th >Description</th>
+      <th>Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    {course.map((i, index) => (
+      <tr key={index}>
+        <td >{i.title}</td>
+        <td >{i.description}</td>
+        <td>{i.price}</td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+    </div>
   );
 }
