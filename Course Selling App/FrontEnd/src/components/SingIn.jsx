@@ -53,6 +53,7 @@ export default function SignIn() {
               if(response.data.token){
                 alert('Success');
                 localStorage.setItem('token', response.data.token);
+                window.location='/home'
               }
             }).catch((error) => {
               if(error.response.status === 401) {

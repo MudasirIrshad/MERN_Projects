@@ -83,7 +83,7 @@ app.post("/admin/login", async (req, res) => {
 });
 
 app.get('/admin/detail',AdminAuthentication,(req,res)=>{
-  res.json(req.user.gmail)
+  res.send(req.user)
 })
 // ---------------------------------------------------
 app.get("/admin/users", AdminAuthentication, async (req, res) => {

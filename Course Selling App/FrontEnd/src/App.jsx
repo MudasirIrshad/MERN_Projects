@@ -5,22 +5,14 @@ import SignIn from "./components/SingIn";
 import SignUp from "./components/SignUp";
 import AddCourses from "./components/AddCourses";
 import axios from "axios";
+import Home from "./Home";
 function App() {
-
-  useEffect(()=>{
-    axios.get('/admin/detail',{
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`
-      }
-    }).then((res)=>{
-      console.log(res.data.gmail);
-    })
-  },[])
   return (
     <>
       <UserLogin />
       <Router>
         <Routes>
+          <Route path="/home" element={<Home/>} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/addCourses" element={<AddCourses/>}/>
