@@ -8,6 +8,7 @@ export default function AddCourses() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
+  const [image, setImage] = useState("");
 
   return (
     <div>
@@ -45,6 +46,15 @@ export default function AddCourses() {
               setPrice(e.target.value);
             }}
           />
+          <TextField
+            id="standard-basic"
+            label="Image Link"
+            variant="standard"
+            style={{ paddingBottom: "10px" }}
+            onChange={(e) => {
+              setImage(e.target.value);
+            }}
+          />
           <br />
           <Button
             variant="contained"
@@ -56,6 +66,7 @@ export default function AddCourses() {
                     title: title,
                     description: description,
                     price: price,
+                    image: image,
                   },
                   {
                     headers: {

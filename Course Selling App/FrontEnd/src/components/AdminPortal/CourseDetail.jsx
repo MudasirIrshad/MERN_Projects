@@ -20,25 +20,24 @@ export default function CourseDetail() {
       });
   }, []);
   return (
-    <div style={{display:"flex", justifyContent:"center"}}>
-      <table style={{margin:"20px"}}>
-  <thead >
-    <tr >
-      <th >Title</th>
-      <th >Description</th>
-      <th>Price</th>
-    </tr>
-  </thead>
-  <tbody>
-    {course.map((i, index) => (
-      <tr key={index}>
-        <td >{i.title}</td>
-        <td >{i.description}</td>
-        <td>{i.price}</td>
-      </tr>
-    ))}
-  </tbody>
-</table>
+    <div style={{display:"flex", justifyContent:"center", margin:"20px", flexWrap:"wrap"}}>
+      
+     
+          {course.map((item) => {
+            return (
+              <Box sx={{ width: "300px", bgcolor: "background.paper", textAlign:"center", padding:"10px" }}>
+              <Card>
+              <div style={{lineHeight:".5"}}>
+                <h4>Title: {item.title}</h4>
+                <h5>Description: {item.description}</h5>
+                <h5>Price: {item.price}</h5>
+                <img src={item.image} alt="Course Image" style={{width:"100vw", height:"200px"}}/>
+              </div>
+              </Card>
+        </Box>
+            );
+          })}
+      
     </div>
   );
 }

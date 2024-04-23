@@ -35,6 +35,7 @@ const courseAddSchema = new mongoose.Schema({
   title: String,
   description: String,
   price: Number,
+  image: String,
 });
 const courseAdd = mongoose.model("courseAdd", courseAddSchema);
 
@@ -54,7 +55,7 @@ app.post("/admin/signup", async (req, res) => {
       gmail,
       password,
     });
-    
+
     newAdmin.save();
   }
 });
@@ -72,7 +73,7 @@ const AdminAuthentication = (req, res, next) => {
 };
 app.post("/admin/login", async (req, res) => {
   const { name, gmail, password } = req.body;
-  let findAdmin = await AdminSignup.findOne({ name,gmail, password });
+  let findAdmin = await AdminSignup.findOne({ name, gmail, password });
   if (findAdmin) {
     jwt.sign({ name, gmail, password }, AdminSecretKey, (err, token) => {
       res.status(200).send({ name, gmail, token });
@@ -82,9 +83,9 @@ app.post("/admin/login", async (req, res) => {
   }
 });
 
-app.get('/admin/detail',AdminAuthentication,(req,res)=>{
-  res.send(req.user)
-})
+app.get("/admin/detail", AdminAuthentication, (req, res) => {
+  res.send(req.user);
+});
 // ---------------------------------------------------
 app.get("/admin/users", AdminAuthentication, async (req, res) => {
   const users = await UserSignup.find();
@@ -93,18 +94,19 @@ app.get("/admin/users", AdminAuthentication, async (req, res) => {
 // ----------- Course Add, Detail --------------------
 
 app.post("/admin/courses", AdminAuthentication, (req, res) => {
-  const { title, description, price } = req.body;
+  const { title, description, price, image } = req.body;
   const newCourse = new courseAdd({
     title,
     description,
     price,
+    image,
   });
   newCourse.save();
   res.send({ title, description, price });
 });
 app.get("/admin/courses", AdminAuthentication, async (req, res) => {
   const courses = await courseAdd.find();
-  res.send( courses );
+  res.send(courses);
 });
 // ----------------------------------------------------
 const UserSecretKey = "I am a user";
