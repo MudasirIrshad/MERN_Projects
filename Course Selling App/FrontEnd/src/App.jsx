@@ -7,17 +7,19 @@ import AddCourses from "./components/AdminPortal/AddCourses";
 import axios from "axios";
 import Home from "./components/AdminPortal/Home";
 import CourseDetail from "./components/AdminPortal/CourseDetail";
+import SingleCourse from "./components/AdminPortal/SingleCourse";
 function App() {
   return (
     <>
       <UserLogin />
       <Router>
         <Routes>
-          <Route path="/home" element={<Home/>} />
+          <Route path="/home" element={<Home />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/addCourses" element={<AddCourses/>}/>
-          <Route path="/courseDetail" element={<CourseDetail/>}/>
+          <Route path="/addCourses" element={<AddCourses />} />
+          <Route path="/courseDetail" element={<CourseDetail />} />
+          <Route path="/courseEdit/:id" element={<SingleCourse />} />
         </Routes>
       </Router>
     </>

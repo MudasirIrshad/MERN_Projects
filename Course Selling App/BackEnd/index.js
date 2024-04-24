@@ -104,6 +104,12 @@ app.post("/admin/courses", AdminAuthentication, (req, res) => {
   newCourse.save();
   res.send({ title, description, price });
 });
+app.put('/admin/editCourse/:courseId',AdminAuthentication,async(req,res)=>{
+  const id=req.params.courseId
+  
+  const course=await courseAdd.findById(id)
+  res.send(course)
+})
 app.get("/admin/courses", AdminAuthentication, async (req, res) => {
   const courses = await courseAdd.find();
   res.send(courses);
