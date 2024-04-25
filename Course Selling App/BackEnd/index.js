@@ -8,6 +8,7 @@ const cors = require("cors");
 app.use(cors());
 app.use(bodyParser.json());
 
+
 const URL =
   "mongodb+srv://mudasirirshad47:mudasir123456789@cluster0.jzcnrjw.mongodb.net/Course_Selling_App";
 
