@@ -1,6 +1,5 @@
 import Card from "@mui/material/Card";
 import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -43,7 +42,6 @@ export default function CourseDetail() {
               <div style={{ lineHeight: ".5" }}>
                 <h4>Title: {item.title}</h4>
                 <h5>Description: {item.description}</h5>
-                <h5>ID: {item._id}</h5>
                 <h5>Price: {item.price}</h5>
                 <img
                   src={item.image}
@@ -53,18 +51,8 @@ export default function CourseDetail() {
                 <Button
                   variant="outlined"
                   size="small"
-                  style={{ margin: "5px" }}
-                  // onClick={() => {
-                  // useEffect(()=>{
-                  //   setCourseId(item._id)
-                  // },[])
-                  // window.location='/courseEdit'
-                  // courseId
-                  // <Link to={`/courseEdit/${item._id}`} />;
-                  // }}
-                >
+                  style={{ margin: "5px" }}>
                   <Link to={`/courseEdit/${item._id}`}>Edit Course</Link>;
-                  {/* Edit Course */}
                 </Button>
               </div>
             </Card>

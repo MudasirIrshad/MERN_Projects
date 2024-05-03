@@ -4,6 +4,7 @@ import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import { useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 export default function SignIn() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -53,7 +54,7 @@ export default function SignIn() {
               if(response.data.token){
                 alert('Success');
                 localStorage.setItem('token', response.data.token);
-                window.location='/home'
+                
               }
             }).catch((error) => {
               if(error.response.status === 401) {
@@ -61,7 +62,7 @@ export default function SignIn() {
               }});
             
           }}>
-            Login
+            <Link to={"/home"}>Login</Link>
           </Button>
         </Card>
       </Box>

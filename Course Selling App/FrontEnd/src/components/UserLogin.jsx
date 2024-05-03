@@ -7,7 +7,8 @@ function UserLogin() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUserName]=useState("")
   useEffect(() => {
-    axios
+    setInterval(() =>{
+      axios
       .get("http://localhost:3000/admin/detail", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -20,6 +21,8 @@ function UserLogin() {
           
         }
       });
+    },1000)
+    
   }, []);
   if(isLoggedIn) {
     return (
