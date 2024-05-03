@@ -7,7 +7,7 @@ function UserLogin() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUserName]=useState("")
   useEffect(() => {
-    setInterval(() =>{
+    const interval = setInterval(() =>{
       axios
       .get("http://localhost:3000/admin/detail", {
         headers: {
@@ -18,10 +18,12 @@ function UserLogin() {
         if (res.data.gmail) {
           setIsLoggedIn(true);
           setUserName(res.data.name)
+          clearInterval(interval)
           
         }
       });
     },1000)
+
     
   }, []);
   if(isLoggedIn) {

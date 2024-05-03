@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 export default function AddCourses() {
   const [title, setTitle] = useState("");
@@ -89,9 +90,8 @@ export default function AddCourses() {
         </Card>
       </Box>
     </div>
-    <Button variant="outlined" onClick={()=>{
-      window.location="/courseDetail"
-    }}>Course Detail</Button>
+    <Button variant="outlined">
+      <Link to={"/courseDetail"}>Course Detail</Link></Button>
     </div>
   );
 }
