@@ -8,7 +8,6 @@ const cors = require("cors");
 app.use(cors());
 app.use(bodyParser.json());
 
-
 const URL =
   "mongodb+srv://mudasirirshad47:mudasir123456789@cluster0.jzcnrjw.mongodb.net/Course_Selling_App";
 
@@ -105,12 +104,24 @@ app.post("/admin/courses", AdminAuthentication, (req, res) => {
   newCourse.save();
   res.send({ title, description, price });
 });
-app.put('/admin/editCourse/:courseId',AdminAuthentication,async(req,res)=>{
-  const id=req.params.courseId
-  
-  const course=await courseAdd.findById(id)
-  res.send(course)
-})
+app.put(
+  "/admin/editCourse/:courseId",
+  AdminAuthentication,
+  async (req, res) => {
+    const id = req.params.courseId;
+    const { title, description, price, image } = req.body;
+    const course = await courseAdd.findById(id);
+    if (!course) res.status(404).send("Course not found");
+    else {
+      course.title = title;
+      course.description = description;
+      course.price = price;
+      course.image = image;
+      course.save();
+      res.send({ title, description, price });
+    }
+  }
+);
 app.get("/admin/courses", AdminAuthentication, async (req, res) => {
   const courses = await courseAdd.find();
   res.send(courses);

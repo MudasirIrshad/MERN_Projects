@@ -5,43 +5,42 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 function UserLogin() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userName, setUserName]=useState("")
+  const [userName, setUserName] = useState("");
   useEffect(() => {
-    const interval = setInterval(() =>{
+    const interval = setInterval(() => {
       axios
-      .get("http://localhost:3000/admin/detail", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
-      .then((res) => {
-        if (res.data.gmail) {
-          setIsLoggedIn(true);
-          setUserName(res.data.name)
-          clearInterval(interval)
-          
-        }
-      });
-    },1000)
-
-    
+        .get("http://localhost:3000/admin/detail", {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        })
+        .then((res) => {
+          if (res.data.gmail) {
+            setIsLoggedIn(true);
+            setUserName(res.data.name);
+            clearInterval(interval);
+          }
+        });
+    }, 1000);
   }, []);
-  if(isLoggedIn) {
+  if (isLoggedIn) {
     return (
-      <div style={{display:"flex", justifyContent:"space-between"}}>
-        <Button variant="contained" style={{backgroundColor:"Red"}}>Logo</Button>
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <Button variant="contained" style={{ backgroundColor: "Red" }}>
+          Logo
+        </Button>
         <ButtonGroup>
           <Button
             variant="contained"
             onClick={() => {
               localStorage.removeItem("token");
               setIsLoggedIn(false);
-              window.location="/signin"
+              window.location = "/signin";
             }}
           >
             Logout
           </Button>
-          
+
           <Button
             style={{ backgroundColor: "red", color: "white" }}
             onClick={() => {
@@ -57,7 +56,9 @@ function UserLogin() {
   return (
     <>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <Button variant="contained" style={{backgroundColor:"Red"}}>Logo</Button>
+        <Button variant="contained" style={{ backgroundColor: "Red" }}>
+          Logo
+        </Button>
         <ButtonGroup
           variant="outlined"
           aria-label="Basic button group"

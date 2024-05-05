@@ -13,85 +13,88 @@ export default function AddCourses() {
 
   return (
     <div>
-      
-    <div style={{ display: "flex", justifyContent: "center", margin: "50px" }}>
-      <Box sx={{ minWidth: 275 }}>
-        <Card
-          variant="outlined"
-          style={{ width: "300px", textAlign: "center", padding: "10px" }}
-        >
-          <TextField
-            id="standard-basic"
-            label="Title"
-            variant="standard"
-            style={{ paddingBottom: "10px" }}
-            onChange={(e) => {
-              setTitle(e.target.value);
-            }}
-          />
-          <TextField
-            id="standard-basic"
-            label="Description"
-            variant="standard"
-            style={{ paddingBottom: "10px" }}
-            onChange={(e) => {
-              setDescription(e.target.value);
-            }}
-          />
-          <TextField
-            id="standard-basic"
-            label="Price"
-            variant="standard"
-            style={{ paddingBottom: "10px" }}
-            onChange={(e) => {
-              setPrice(e.target.value);
-            }}
-          />
-          <TextField
-            id="standard-basic"
-            label="Image Link"
-            variant="standard"
-            style={{ paddingBottom: "10px" }}
-            onChange={(e) => {
-              setImage(e.target.value);
-            }}
-          />
-          <br />
-          <Button
-            variant="contained"
-            onClick={() => {
-              axios
-                .post(
-                  "http://localhost:3000/admin/courses",
-                  {
-                    title: title,
-                    description: description,
-                    price: price,
-                    image: image,
-                  },
-                  {
-                    headers: {
-                      "Content-Type": "application/json",
-                      Authorization: "Bearer " + localStorage.getItem("token"),
-                    },
-                  }
-                )
-                .then((response) => {
-                  console.log(response.data);
-                  alert("success");
-                })
-                .catch((error) => {
-                  alert(error.message);
-                });
-            }}
+      <div
+        style={{ display: "flex", justifyContent: "center", margin: "50px" }}
+      >
+        <Box sx={{ minWidth: 275 }}>
+          <Card
+            variant="outlined"
+            style={{ width: "300px", textAlign: "center", padding: "10px" }}
           >
-            Add Course
-          </Button>
-        </Card>
-      </Box>
-    </div>
-    <Button variant="outlined">
-      <Link to={"/courseDetail"}>Course Detail</Link></Button>
+            <TextField
+              id="standard-basic"
+              label="Title"
+              variant="standard"
+              style={{ paddingBottom: "10px" }}
+              onChange={(e) => {
+                setTitle(e.target.value);
+              }}
+            />
+            <TextField
+              id="standard-basic"
+              label="Description"
+              variant="standard"
+              style={{ paddingBottom: "10px" }}
+              onChange={(e) => {
+                setDescription(e.target.value);
+              }}
+            />
+            <TextField
+              id="standard-basic"
+              label="Price"
+              variant="standard"
+              style={{ paddingBottom: "10px" }}
+              onChange={(e) => {
+                setPrice(e.target.value);
+              }}
+            />
+            <TextField
+              id="standard-basic"
+              label="Image Link"
+              variant="standard"
+              style={{ paddingBottom: "10px" }}
+              onChange={(e) => {
+                setImage(e.target.value);
+              }}
+            />
+            <br />
+            <Button
+              variant="contained"
+              onClick={() => {
+                axios
+                  .post(
+                    "http://localhost:3000/admin/courses",
+                    {
+                      title: title,
+                      description: description,
+                      price: price,
+                      image: image,
+                    },
+                    {
+                      headers: {
+                        "Content-Type": "application/json",
+                        Authorization:
+                          "Bearer " + localStorage.getItem("token"),
+                      },
+                    }
+                  )
+                  .then((response) => {
+                    console.log(response.data);
+                    alert("success");
+                  })
+                  .catch((error) => {
+                    alert(error.message);
+                  });
+              }}
+            >
+              Add Course
+            </Button>
+          </Card>
+        </Box>
+      </div>
+      <Button variant="outlined">
+        <Link to={"/courseDetail"}>Course Detail</Link>
+      </Button>
     </div>
   );
 }

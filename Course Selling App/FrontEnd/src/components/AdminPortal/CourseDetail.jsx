@@ -51,7 +51,8 @@ export default function CourseDetail() {
                 <Button
                   variant="outlined"
                   size="small"
-                  style={{ margin: "5px" }}>
+                  style={{ margin: "5px" }}
+                >
                   <Link to={`/courseEdit/${item._id}`}>Edit Course</Link>;
                 </Button>
               </div>
