@@ -48,13 +48,48 @@ export default function CourseDetail() {
                   alt="Course Image"
                   style={{ width: "100vw", height: "200px" }}
                 />
-                <Button
-                  variant="outlined"
-                  size="small"
-                  style={{ margin: "5px" }}
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    margin: "4px",
+                  }}
                 >
-                  <Link to={`/courseEdit/${item._id}`}>Edit Course</Link>;
-                </Button>
+                  <Button
+                    variant="outlined"
+                    size="small"
+                    style={{ margin: "5px" }}
+                  >
+                    <Link to={`/courseEdit/${item._id}`}>Edit Course</Link>;
+                  </Button>
+                  <Button
+                    variant="contained"
+                    size="small"
+                    style={{ backgroundColor: "red" }}
+                    onClick={() => {
+                      let id=item._id
+                      axios
+                       .delete(
+                          `http://localhost:3000/admin/course/${id}`,
+                          {
+                            headers: {
+                              "Content-Type": "application/json",
+                              Authorization: "Bearer " + localStorage.getItem("token"),
+                            },
+                          }
+                        )
+                       .then((response) => {
+                          alert(response.data.message);
+                          window.location.reload();
+                        })
+                       .catch((error) => {
+                          alert(error.message);
+                        });
+                    }}
+                  >
+                    Delete
+                  </Button>
+                </div>
               </div>
             </Card>
           </Box>

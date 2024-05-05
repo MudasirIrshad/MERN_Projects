@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { Card, Box, Button, TextField } from "@mui/material";
+import { Link } from "react-router-dom";
 export default function SingleCourse() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -56,33 +57,32 @@ export default function SingleCourse() {
           variant="contained"
           onClick={() => {
             console.log(id);
-            axios.put(
-              `http://localhost:3000/admin/editCourse/${id}`,
-              {
-                title: title,
-                description: description,
-                price: price,
-                image: image,
-              },
-              {
-                headers: {
-                  "Content-Type": "application/json",
-                  Authorization:
-                    "Bearer " + localStorage.getItem("token"),
+            axios
+              .put(
+                `http://localhost:3000/admin/editCourse/${id}`,
+                {
+                  title: title,
+                  description: description,
+                  price: price,
+                  image: image,
                 },
-              }
-            )
-            .then((response) => {
-              console.log(response.data);
-              alert("Course Updated");
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-            
+                {
+                  headers: {
+                    "Content-Type": "application/json",
+                    Authorization: "Bearer " + localStorage.getItem("token"),
+                  },
+                }
+              )
+              .then((response) => {
+                console.log(response.data);
+                alert("Course Updated");
+              })
+              .catch((error) => {
+                console.error(error);
+              });
           }}
         >
-          Update
+          <Link to={'/CourseDetail'}>Update</Link>
         </Button>
       </Card>
     </div>

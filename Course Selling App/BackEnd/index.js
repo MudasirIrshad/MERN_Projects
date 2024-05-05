@@ -126,6 +126,14 @@ app.get("/admin/courses", AdminAuthentication, async (req, res) => {
   const courses = await courseAdd.find();
   res.send(courses);
 });
+app.delete("/admin/course/:id", AdminAuthentication, async (req, res) => {
+  const id = req.params.id;
+  const course = await courseAdd.findByIdAndDelete(id);
+  if (!course) res.status(404).send("Course not found");
+  else {  
+    res.send({ message: "Course deleted" });
+  }
+});
 // ----------------------------------------------------
 const UserSecretKey = "I am a user";
 app.post("/user/signup", async (req, res) => {

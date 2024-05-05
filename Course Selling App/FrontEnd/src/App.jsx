@@ -20,6 +20,7 @@ function App() {
           <Route path="/addCourses" element={<AddCourses />} />
           <Route path="/courseDetail" element={<CourseDetail />} />
           <Route path="/courseEdit/:id" element={<SingleCourse />} />
+          
         </Routes>
       </Router>
     </>
