@@ -67,22 +67,24 @@ export default function CourseDetail() {
                     size="small"
                     style={{ backgroundColor: "red" }}
                     onClick={() => {
-                      let id=item._id
+                      let id = item._id;
                       axios
-                       .delete(
+                        .delete(
                           `http://localhost:3000/admin/course/${id}`,
+
                           {
                             headers: {
                               "Content-Type": "application/json",
-                              Authorization: "Bearer " + localStorage.getItem("token"),
+                              Authorization:
+                                "Bearer " + localStorage.getItem("token"),
                             },
                           }
                         )
-                       .then((response) => {
+                        .then((response) => {
                           alert(response.data.message);
                           window.location.reload();
                         })
-                       .catch((error) => {
+                        .catch((error) => {
                           alert(error.message);
                         });
                     }}

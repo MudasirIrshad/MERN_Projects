@@ -82,7 +82,7 @@ export default function SingleCourse() {
               });
           }}
         >
-          <Link to={'/CourseDetail'}>Update</Link>
+          <Link to={"/CourseDetail"}>Update</Link>
         </Button>
       </Card>
     </div>
