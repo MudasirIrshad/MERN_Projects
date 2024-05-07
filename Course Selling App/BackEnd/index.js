@@ -7,7 +7,7 @@ const jwt = require("jsonwebtoken");
 const cors = require("cors");
 app.use(cors());
 app.use(bodyParser.json());
-
+const {AdminSignup,UserSignup,courseAdd} = require("./db/index")
 
 app.listen(port, () => {
   console.log("Server Started at port: " + port);
