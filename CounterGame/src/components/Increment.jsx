@@ -1,24 +1,25 @@
-import React from 'react'
+import React, { useContext } from "react";
+
 import Card from "@mui/material/Card";
 import Box from "@mui/material/Box";
 import { Button } from "@mui/material";
-
-export default function Increment(props) {
-    let count = props.count
-    let setCount = props.setCount
+import { CountContext } from "../Context";
+export default function Increment() {
+  let { count, setCount } = useContext(CountContext);
   return (
     <>
-    <Card>
+      <Card>
         <Box>
-            <Button 
-            variant='contained'
-            onClick={()=>{
-                setCount(count+1)
-            }}>
-                Increment
-            </Button>
+          <Button
+            onClick={() => {
+              setCount(count + 1);
+            }}
+            variant="contained"
+          >
+            Increment
+          </Button>
         </Box>
-    </Card>
+      </Card>
     </>
-  )
+  );
 }

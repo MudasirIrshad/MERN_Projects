@@ -1,12 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import Card from "@mui/material/Card";
 import Box from "@mui/material/Box";
 import { Button } from "@mui/material";
-
-export default function Decrement(props) {
-  let count = props.count;
-  let setCount = props.setCount;
+import { CountContext } from "../Context";
+export default function Decrement() {
+  let { count, setCount } = useContext(CountContext);
   return (
     <>
       <Card>
