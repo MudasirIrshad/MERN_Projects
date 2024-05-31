@@ -1,19 +1,12 @@
 import React from "react";
-import { useState } from "react";
 import Increment from "./components/Increment";
 import { Card } from "@mui/material";
 import Decrement from "./components/Decrement";
-import { CountContext } from "./Context";
+import Count from "./components/Count";
 
 export default function App() {
-  const [count, setCount] = useState(0);
   return (
-    <CountContext.Provider
-      value={{
-        count,
-        setCount,
-      }}
-    >
+    <div>
       <Card style={{ padding: "20px", textAlign: "center" }}>
         <div
           style={{
@@ -25,8 +18,8 @@ export default function App() {
           <Increment />
           <Decrement />
         </div>
-        <h1>{count}</h1>
+        <Count />
       </Card>
-    </CountContext.Provider>
+    </div>
   );
 }
