@@ -6,8 +6,13 @@ import Income from "./Income";
 import Expense from "./Expense";
 import Calculations from "./Calculations";
 import Home from "./Home";
+import axios from "axios";
+import { useSetRecoilState } from "recoil";
+import { allExpensesState, allIncomeState } from "../Atoms";
 
 export default function Nav() {
+  const setAllExpenses = useSetRecoilState(allExpensesState);
+  const setAllIncome = useSetRecoilState(allIncomeState);
   return (
     <Router>
       <ButtonGroup variant="contained" aria-label="Basic button group">
@@ -19,7 +24,18 @@ export default function Nav() {
           <Button>Expense</Button>
         </Link>
         <Link to={"/Calculations"}>
-          <Button>Calculations</Button>
+          <Button
+            onClick={() => {
+              axios.get("http://localhost:3000/expenses").then((res) => {
+                setAllExpenses(res.data);
+              });
+              axios.get("http://localhost:3000/income").then((res) => {
+                setAllIncome(res.data);
+              });
+            }}
+          >
+            Calculations
+          </Button>
         </Link>
       </ButtonGroup>
       <Routes>

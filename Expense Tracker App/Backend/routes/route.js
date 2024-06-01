@@ -25,4 +25,8 @@ router.get("/income",(req, res) => {
         res.send(data);
     })
 })
-module.exports = router;
+router.delete("/deleteIncome",(req, res) => {
+  Income.findByIdAndDelete(req.body.id).then((data) => {
+    res.send(data);
+  })})
+module.exports = router

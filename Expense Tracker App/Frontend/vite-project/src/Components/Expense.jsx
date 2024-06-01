@@ -1,11 +1,13 @@
-import React from "react";
-import { Button, Card } from "@mui/material";
+import React, { useState } from "react";
+import { Alert, Button, Card, Snackbar } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { expenseAmountState, expenseNameState } from "../Atoms";
 import axios from "axios";
 
 export default function Expense() {
+  const [alertVisible, setAlertVisible] = useState(false);
+
   let name = useRecoilValue(expenseNameState);
   let amount = useRecoilValue(expenseAmountState);
   const setName = useSetRecoilState(expenseNameState);
@@ -44,15 +46,19 @@ export default function Expense() {
                 amount: amount,
               })
               .then((res) => {
-                alert(res.data);
+                setAlertVisible(true);
+                let interval = setInterval(() => {
+                  setAlertVisible(false);
+                }, 2000);
               });
           }}
         >
           Add Expense
         </Button>
       </Card>
+      {alertVisible && (
+        <Snackbar open={open} autoHideDuration={6000} message="Success" />
+      )}
     </div>
   );
 }
-
-function backendRequest_ExpenseDetails() {}
