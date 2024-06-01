@@ -8,4 +8,13 @@ const expenseAmountState = atom({
     default: 0
 })
 
-export {expenseNameState, expenseAmountState}
+const incomeNameState = atom({
+    key: 'nameState',
+    default: ''
+})
+
+const incomeAmountState = atom({
+    key: 'amountState',
+    default: 0
+})
+export {expenseNameState, expenseAmountState, incomeAmountState, incomeNameState}
