@@ -29,4 +29,9 @@ router.delete("/deleteIncome",(req, res) => {
   Income.findByIdAndDelete(req.body.id).then((data) => {
     res.send(data);
   })})
+
+  router.delete("/deleteExpense",(req, res) => {
+    Expense.findByIdAndDelete(req.body.id).then((data) => {
+      res.send(data);
+    })})
 module.exports = router
