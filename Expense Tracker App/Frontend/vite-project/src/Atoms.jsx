@@ -27,9 +27,4 @@ const allIncomeState = atom({
     default: []
 })
 
-const totalExpenses = atom({
-    key: 'totalExpenses',
-    default: 0
-})
-
-export {expenseNameState, expenseAmountState, incomeAmountState, incomeNameState, allExpensesState, allIncomeState, totalExpenses}
+export {expenseNameState, expenseAmountState, incomeAmountState, incomeNameState, allExpensesState, allIncomeState}

@@ -1,5 +1,5 @@
-import React from "react";
-import { Button, Card } from "@mui/material";
+import React, {useState} from "react";
+import { Button, Card, Snackbar } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import axios from "axios";
@@ -10,6 +10,7 @@ export default function Income() {
   let amount = useRecoilValue(incomeAmountState);
   const setName = useSetRecoilState(incomeNameState);
   const setAmount = useSetRecoilState(incomeAmountState)
+  const [alertVisible, setAlertVisible] = useState(false);
   return (
     <div>
       <Card style={{ textAlign: "center", margin: "10px", padding: "10px" }}>
@@ -44,13 +45,19 @@ export default function Income() {
                 amount: amount,
               })
               .then((res) => {
-                console.log(res.data);
+                setAlertVisible(true);
+                let interval = setInterval(() => {
+                  setAlertVisible(false);
+                }, 2000);
               });
           }}
         >
           Add Income
         </Button>
       </Card>
+      {alertVisible && (
+        <Snackbar open={open} autoHideDuration={6000} message="Success" />)}
+      
     </div>
   );
 }
