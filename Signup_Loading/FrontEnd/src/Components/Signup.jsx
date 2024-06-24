@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import Card from "@mui/material/Card";
 import { TextField, Button } from "@mui/material";
 import axios from "axios";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { emailState, nameState, passwordState } from "../store/atom";
 
 export default function Signup() {
-  const [name, setName] = useState(null);
-  const [email, setEmail] = useState(null);
-  const [password, setPassword] = useState(null);
+  const [name, setName] = useRecoilState(nameState);
+  const [password, setPassword] = useRecoilState(passwordState);
+  const [email, setEmail] = useRecoilState(emailState);
   return (
     <Card style={{ width: "400px", textAlign: "center" }}>
       <h3>SignUp</h3>
