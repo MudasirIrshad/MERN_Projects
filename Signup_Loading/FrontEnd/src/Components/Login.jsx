@@ -2,6 +2,8 @@ import Card from "@mui/material/Card";
 import { TextField, Button } from "@mui/material";
 import axios from "axios";
 import { useRecoilState } from "recoil";
+
+import CircularProgress from '@mui/material/CircularProgress';
 import {
   emailState,
   loadingState,
@@ -27,7 +29,7 @@ export default function Login() {
         <div>
           <Card style={{ width: "400px", textAlign: "center" }}>
             {loading ? (
-              
+              <CircularProgress />
             ) : (
               <div>
                 <h3>Login</h3>
