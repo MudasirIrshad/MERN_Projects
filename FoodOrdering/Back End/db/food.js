@@ -1,8 +1,5 @@
 const mongoose = require("mongoose");
-import { URL } from "./admin";
-mongoose.connect(URL).then(()=>{
-    console.log("Connected");
-})
+
 
 const foodSchema = new mongoose.Schema({
   name: {
@@ -17,7 +14,10 @@ const foodSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  available: true,
+  available: {
+    type: Boolean,
+    default: true,
+  }
 });
-const food = mongoose.model("food", foodSchema);
-module.exports = food;
+const Food = mongoose.model("food", foodSchema);
+module.exports = Food;
