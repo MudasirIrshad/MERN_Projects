@@ -4,10 +4,11 @@ const Food = require("../db/food"); // Import Food correctly
 const Admin = require("../db/admin");
 const jwt = require("jsonwebtoken");
 const router = express.Router();
+const adminMiddleware = require("../middleware/adminMiddleware");
 const secretKey = "admin secret key";
 
 // GET route to fetch all foods
-router.get("/food", async (req, res) => {
+router.get("/food", adminMiddleware, async (req, res) => {
   try {
     const foods = await Food.find();
     res.json(foods);
@@ -38,8 +39,18 @@ router.post("/signup", async (req, res) => {
   }
 });
 
+router.post("/login", async (req, res) => {
+  const { name, email, password } = req.body;
+  const admin = await Admin.findOne({ name, email, password });
+  if (!admin) {
+    return res.status(401).json({ message: "Invalid credentials" });
+  }
+  const token = jwt.sign({ id: admin._id, email }, secretKey);
+  res.json({ token, message: "Login done" });
+});
+
 // POST route to add new food
-router.post("/addFood", async (req, res) => {
+router.post("/addFood", adminMiddleware, async (req, res) => {
   try {
     const newFood = new Food({
       name: req.body.name,
