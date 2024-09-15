@@ -16,7 +16,6 @@ const Tasks = new mongoose.Schema({
 });
 
 const AddTask = mongoose.model("AddTask", Tasks);
-
 app.post("/tasks", (req, res) => {
   const title = req.body.title;
   const description = req.body.description;
