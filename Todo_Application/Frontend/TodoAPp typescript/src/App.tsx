@@ -1,16 +1,22 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+interface Todo {
+  _id: string;
+  title: string;
+  description: string;
+}
 function App() {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState<Todo[]>([]);
   const [showTasks, setShowTasks] = useState(false); // State to control the display of tasks
 
   useEffect(() => {
-    setInterval(()=>{
+    setInterval(() => {
       axios.get("http://localhost:3000/tasks").then((response) => {
-      setTasks(response.data);
-    });
-    },1000)
+        const data: Todo[] = response.data;
+        setTasks(data);
+      });
+    }, 1000);
   }, []);
 
   const handleClick = () => {
@@ -35,9 +41,12 @@ function App() {
       {showTasks && (
         <ul>
           {tasks.map((task) => (
-            <li style={{ listStyle: "none", padding: "0.5rem" }} key={task._id}>
-              {task._id}: {task.title}: {task.description}
-            </li>
+            <ul style={{ listStyle: "none", padding: "0.5rem" }} key={task._id}>
+              <li>{task._id}</li>
+              <li>{task.title}</li>
+              <li>{task.description}</li>
+              <li>------------------</li>
+            </ul>
           ))}
         </ul>
       )}
@@ -50,7 +59,6 @@ function App() {
             placeholder="Title"
             onChange={(e) => {
               setTitle(e.target.value);
-              
             }}
           />
           <input
@@ -74,15 +82,15 @@ function App() {
                 .then((response) => {
                   // Handle response
                   console.log("Response:", response);
-                  setTitle(" ")
-                  setDescription(" ")
+                  setTitle(" ");
+                  setDescription(" ");
                 })
                 .catch((error) => {
                   // Handle error
                   console.error("Error:", error);
                 });
               event.preventDefault();
-              title.textContent = ""
+              title.textContent = "";
             }}
           />
         </form>
@@ -102,7 +110,7 @@ function App() {
               type="submit"
               value="Submit"
               onClick={() => {
-                setTaskID(" ")
+                setTaskID(" ");
                 axios
                   .delete(
                     `http://localhost:3000/tasks/${TaskID}`,
@@ -116,7 +124,7 @@ function App() {
                     // Handle error
                     console.error("Error:", error);
                   });
-                
+
                 event.preventDefault();
               }}
             ></input>
