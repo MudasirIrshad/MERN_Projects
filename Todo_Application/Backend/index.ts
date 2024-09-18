@@ -1,5 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
+
 const app = express();
 const port = 3000;
 const url =
@@ -16,13 +17,16 @@ const Tasks = new mongoose.Schema({
 });
 
 const AddTask = mongoose.model("AddTask", Tasks);
+
+interface createTask {
+  title: string;
+  description: string;
+}
 app.post("/tasks", (req, res) => {
-  const title = req.body.title;
-  const description = req.body.description;
-  console.log(title);
+  const input: createTask = req.body;
   const newTask = new AddTask({
-    title,
-    description,
+    title: input.title,
+    description: input.description,
   });
   res.send("Added successfully");
   newTask.save();
