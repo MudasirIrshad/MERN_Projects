@@ -1,5 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
+import z from "zod";
 
 const app = express();
 const port = 3000;
@@ -18,15 +19,21 @@ const Tasks = new mongoose.Schema({
 
 const AddTask = mongoose.model("AddTask", Tasks);
 
-interface createTask {
-  title: string;
-  description: string;
-}
+let inputTodo = z.object({
+  title: z.string().min(1).max(10),
+  description: z.string().min(1).max(50),
+});
 app.post("/tasks", (req, res) => {
-  const input: createTask = req.body;
+  const input = inputTodo.safeParse(req.body);
+  if (!input.success)
+    return res.status(404).send({
+      error: "Invalid input",
+    });
+  let title = input.data?.title;
+  let description = input.data?.description;
   const newTask = new AddTask({
-    title: input.title,
-    description: input.description,
+    title: title,
+    description: description,
   });
   res.send("Added successfully");
   newTask.save();
