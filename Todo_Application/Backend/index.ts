@@ -19,10 +19,6 @@ const Tasks = new mongoose.Schema({
 
 const AddTask = mongoose.model("AddTask", Tasks);
 
-let inputTodo = z.object({
-  title: z.string().min(1).max(10),
-  description: z.string().min(1).max(50),
-});
 app.post("/tasks", (req, res) => {
   const input = inputTodo.safeParse(req.body);
   if (!input.success)
