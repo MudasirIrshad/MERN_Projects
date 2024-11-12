@@ -1,6 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
-import z from "zod";
+import {InputTodoZodInfer} from "mudasir_irshad"
 
 const app = express();
 const port = 3000;
