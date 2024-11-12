@@ -4,7 +4,7 @@
     "cors": "^2.8.5",
     "express": "^4.21.0",
     "mongoose": "^8.2.4",
-    "mudasir_irshad": "^1.0.1",
+    "mudasir_irshad": "^1.0.2",
     "tsc": "^2.0.4",
     "zod": "^3.23.8"
   },

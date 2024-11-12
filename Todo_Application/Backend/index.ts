@@ -1,6 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
-import {InputTodoZodInfer} from "mudasir_irshad"
+import { inputTodo } from "mudasir_irshad";
 
 const app = express();
 const port = 3000;
@@ -20,13 +20,14 @@ const Tasks = new mongoose.Schema({
 const AddTask = mongoose.model("AddTask", Tasks);
 
 app.post("/tasks", (req, res) => {
-  const input = inputTodo.safeParse(req.body);
-  if (!input.success)
-    return res.status(404).send({
-      error: "Invalid input",
+  let parsedInput = inputTodo.safeParse(req.body);
+  if (!parsedInput.success) {
+    return res.status(403).json({
+      msg: "error",
     });
-  let title = input.data?.title;
-  let description = input.data?.description;
+  }
+  let title = parsedInput.data?.title;
+  let description = parsedInput.data?.description;
   const newTask = new AddTask({
     title: title,
     description: description,
