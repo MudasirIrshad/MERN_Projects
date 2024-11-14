@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { InputTodoZodInfer } from "mudasir_irshad";
 
 interface Todo {
   _id: string;
@@ -34,6 +35,10 @@ function App() {
     setDeleteTasks(!deleteTasks);
   };
   const [TaskID, setTaskID] = useState("");
+  let inputTodo: InputTodoZodInfer = {
+    title: title,
+    description: description,
+  };
   return (
     <div>
       <button onClick={handleClick}>Toggle Tasks</button>
@@ -72,11 +77,13 @@ function App() {
           <input
             type="submit"
             value="Submit"
-            onClick={() => {
+            onClick={(event) => {
               axios
                 .post(
                   "http://localhost:3000/tasks",
-                  { title, description }, // Data to be sent in the body
+                  { title:inputTodo.title,
+                    description: inputTodo.description
+                   }, // Data to be sent in the body
                   { headers: { "Content-Type": "application/json" } } // Headers
                 )
                 .then((response) => {
@@ -86,11 +93,12 @@ function App() {
                   setDescription(" ");
                 })
                 .catch((error) => {
+                  console.log(inputTodo);
+
                   // Handle error
-                  console.error("Error:", error);
+                  console.error("this is the :", error);
                 });
               event.preventDefault();
-              title.textContent = "";
             }}
           />
         </form>
